@@ -1,7 +1,7 @@
-// Package dns implements the Azure ARM Dns service API version 2016-04-01.
+// Package devices implements the Azure ARM Devices service API version 2018-04-01.
 //
-// The DNS Management Client.
-package dns
+// Use this API to manage the IoT hubs in your Azure subscription.
+package devices
 
 // Copyright (c) Microsoft and contributors.  All rights reserved.
 //
@@ -25,11 +25,11 @@ import (
 )
 
 const (
-	// DefaultBaseURI is the default URI used for the service Dns
+	// DefaultBaseURI is the default URI used for the service Devices
 	DefaultBaseURI = "https://management.azure.com"
 )
 
-// BaseClient is the base client for Dns.
+// BaseClient is the base client for Devices.
 type BaseClient struct {
 	autorest.Client
 	BaseURI        string
