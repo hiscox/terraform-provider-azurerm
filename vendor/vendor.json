@@ -235,6 +235,14 @@
 			"versionExact": "v18.0.0"
 		},
 		{
+			"checksumSHA1": "8FHoPFAyPhiO78zP4Ai0rH4v0zE=",
+			"path": "github.com/Azure/azure-sdk-for-go/services/preview/subscription/mgmt/2018-03-01-preview/subscription",
+			"revision": "fbe7db0e3f9793ba3e5704efbab84f51436c136e",
+			"revisionTime": "2018-07-03T19:15:42Z",
+			"version": "=v18.0.0",
+			"versionExact": "v18.0.0"
+		},
+		{
 			"checksumSHA1": "UWSnIzZywuEpEevbPfbPNLk1dFk=",
 			"path": "github.com/Azure/azure-sdk-for-go/services/recoveryservices/mgmt/2016-06-01/recoveryservices",
 			"revision": "fbe7db0e3f9793ba3e5704efbab84f51436c136e",
@@ -1603,6 +1611,11 @@
 			"revisionTime": "2017-04-03T20:32:25Z",
 			"version": "v1.6.1",
 			"versionExact": "v1.6.1"
+		},
+		{
+			"path": "services/preview/subscription/mgmt/2018-03-01-preview/subscription/",
+			"revision": "=v18.0.0",
+			"version": "=v18.0.0"
 		}
 	],
 	"rootPath": "github.com/terraform-providers/terraform-provider-azurerm"
