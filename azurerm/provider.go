@@ -160,6 +160,7 @@ func Provider() terraform.ResourceProvider {
 			"azurerm_dns_srv_record":                          resourceArmDnsSrvRecord(),
 			"azurerm_dns_txt_record":                          resourceArmDnsTxtRecord(),
 			"azurerm_dns_zone":                                resourceArmDnsZone(),
+			"azurerm_ea_subscription":                         resourceArmEaSubscription(),
 			"azurerm_eventgrid_topic":                         resourceArmEventGridTopic(),
 			"azurerm_eventhub":                                resourceArmEventHub(),
 			"azurerm_eventhub_authorization_rule":             resourceArmEventHubAuthorizationRule(),
