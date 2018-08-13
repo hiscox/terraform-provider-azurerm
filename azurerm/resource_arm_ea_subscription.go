@@ -1,6 +1,8 @@
 package azurerm
 
 import (
+	"fmt"
+
 	"github.com/Azure/azure-sdk-for-go/services/preview/subscription/mgmt/2018-03-01-preview/subscription"
 	"github.com/hashicorp/terraform/helper/schema"
 )
@@ -9,6 +11,11 @@ func resourceArmEaSubscription() *schema.Resource {
 	return &schema.Resource{
 		Create: resourceArmEaSubscriptionCreate,
 		Read:   resourceArmEaSubscriptionRead,
+		Update: resourceArmEaSubscriptionUpdate,
+		Delete: resourceArmEaSubscriptionDelete,
+		Importer: &schema.ResourceImporter{
+			State: schema.ImportStatePassthrough,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"display_name": {
@@ -29,7 +36,7 @@ func resourceArmEaSubscription() *schema.Resource {
 				ForceNew: true,
 			},
 
-			"subscription_link": {
+			"subscription_id": {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
@@ -77,11 +84,38 @@ func resourceArmEaSubscriptionCreate(d *schema.ResourceData, meta interface{}) e
 	if err != nil {
 		return err
 	}
-	d.Set("subscription_link", *creationResult.SubscriptionLink)
+	d.SetId(*creationResult.SubscriptionLink)
 
 	return resourceArmEaSubscriptionRead(d, meta)
 }
 
 func resourceArmEaSubscriptionRead(d *schema.ResourceData, meta interface{}) error {
+	client := meta.(*ArmClient).subscriptionsClient
+	ctx := meta.(*ArmClient).StopContext
+
+	displayName := d.Get("display_name").(string)
+	allSubs, err := client.List(ctx)
+	if err != nil {
+		return err
+	}
+	d.SetId("")
+	for done := true; done; done = !allSubs.NotDone() {
+		for _, sub := range allSubs.Values() {
+			if sub.DisplayName != nil {
+				if *sub.DisplayName == displayName {
+					d.Set("display_name", *sub.DisplayName)
+					d.SetId(*sub.ID)
+				}
+			}
+		}
+	}
 	return nil
+}
+
+func resourceArmEaSubscriptionUpdate(d *schema.ResourceData, meta interface{}) error {
+	return fmt.Errorf("EA Subscriptions cannot currently be updated")
+}
+
+func resourceArmEaSubscriptionDelete(d *schema.ResourceData, meta interface{}) error {
+	return fmt.Errorf("EA Subscriptions cannot currently be deleted")
 }
